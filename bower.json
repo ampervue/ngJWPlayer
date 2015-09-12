@@ -4,7 +4,11 @@
     "main": "dist/ngjplayer.js",
     "ignore": [
         "src",
+	"node_modules",
+	"bower_components",
+	"index.html",
         ".bowerrc",
+	".git",
         ".gitignore",
         "bower.json",
         "gulpfile.js",
