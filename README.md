@@ -23,3 +23,5 @@ bower install
 gulp
 ~~~~
 
+Inspired by ds62987/angular-jwplayer
+
