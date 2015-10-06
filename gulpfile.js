@@ -30,7 +30,7 @@ var errorHandler = function(title) {
 
 var paths = {
   src: ['src/jwplayer.module.js', 'src/jwplayer.service.js', 'src/jwplayer.directive.js'],
-  dist: 'dist',
+  dist: '.',
   jsFile: 'jwplayer.js',
   jsMinFile: 'jwplayer.min.js'
 };

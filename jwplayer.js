@@ -9,9 +9,6 @@
         ]);
 })();
 /* global jwplayer */
-/**
- * Created by David Karchmer on 9/11/15.
- */
 
 (function () {
     'use strict';
@@ -53,9 +50,7 @@
     JWPlayerService.$inject = ["$log"];
 
 })();
-/**
- * Created by David Karchmer on 9/11/15.
- */
+
 (function() {
     'use strict';
 
