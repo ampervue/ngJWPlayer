@@ -18,7 +18,7 @@ bower install ng-jwplayer --save
 <script type="text/javascript" src="bower_components/angular/angular.js"></script>
 <!-- Remplace xxxxxxxxx with your license code given by JWPLayer -->
 <script src="https://content.jwplatform.com/libraries/xxxxxxxxxxxx.js"></script>    
-<script type="text/javascript" src="bower_components/ng-jwplayer/dist/jwplayer.js"></script>
+<script type="text/javascript" src="bower_components/ng-jwplayer/jwplayer.js"></script>
 ~~~~
 
 * Create all JWPLayer setup options as a object (see http://support.jwplayer.com/customer/portal/articles/1413113-configuration-options-reference). Add th video file as an ng-src
@@ -46,10 +46,11 @@ myApp.controller('mainController', ['$scope', '$log', '$sce', function($scope, $
    $scope.name = 'JWPlayer Example';
             
    $scope.options = {
-        type: 'mp4'
+        type: 'mp4',
+        image: 'http://example.com/myVideoPoster.jpg'
    };
             
-   $scope.file = $sce.trustAsResourceUrl('http://vjs.zencdn.net/v/oceans.mp4');
+   $scope.file = $sce.trustAsResourceUrl('http://example.com/myVideo.mp4');
 
 ]);
 
