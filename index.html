@@ -1,45 +1,43 @@
-
-<!DOCTYPE html>
 <html lang="en" ng-app="myApp">
-<head>
-    <meta charset="utf-8">
+    <head>
+        <meta charset="utf-8">
+        <title>angular-jwplayer</title>
+    </head>
+    <body>
+        <div ng-view>
+            <div class="container">
+                <div ng-controller="mainController">
+                    <h1>{{ name }}</h1>
 
-    <title>angular-jwplayer</title>
+                    <jwplayer ng-src="{{ file }}"
+                              player-options="options"
+                              player-id="myPlayer1">
+                    </jwplayer>
+                </div>
+            </div>
+        </div>
 
-</head>
-<body>
-	<div ng-view>
-		<div class="container">
-			<div ng-controller="mainController">
-		        <h1>{{ name }}</h1>
-                
-                <jwplayer ng-src="{{ file }}"
-                      player-options="options"
-                      player-id="myPlayer1">
-                </jwplayer>
-		    </div>
-		</div>
-	</div>
-	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
-            
-    <!-- Remplace xxxxxxxxx with your license code given by JWPLayer -->
-    <script src="https://content.jwplatform.com/libraries/xxxxxxxxxxxx.js"></script>
-    
-    <script type="text/javascript" src="jwplayer.js"></script>
-	<script>
-        
-		var myApp = angular.module('myApp', ['ng-jwplayer']);
-        myApp.controller('mainController', ['$scope', '$log', '$sce', function($scope, $log, $sce) {
+        <script type="text/javascript" src="bower_components/angular/angular.js"></script>
 
-            $scope.name = 'JWPlayer Example';
-            
-            $scope.options = {
-                type: 'mp4'
-            };
-            
-            $scope.file = $sce.trustAsResourceUrl('http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4');
+        <!-- Remplace xxxxxxxxx with your license code given by JWPLayer -->
+        <script src="https://content.jwplatform.com/libraries/xxxxxxxxxxxx.js"></script>
 
-		}]);
-	</script>
-</body>
+        <script type="text/javascript" src="jwplayer.min.js"></script>
+
+        <script>
+
+            var myApp = angular.module('myApp', ['ng-jwplayer']);
+            myApp.controller('mainController', ['$scope', '$log', '$sce', function ($scope, $log, $sce) {
+
+                $scope.name = 'JWPlayer Example';
+
+                $scope.options = {
+                    type: 'mp4'
+                };
+
+                $scope.file = $sce.trustAsResourceUrl('http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4');
+
+            }]);
+        </script>
+    </body>
 </html>
