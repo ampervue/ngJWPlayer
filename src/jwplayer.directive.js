@@ -7,7 +7,7 @@
         .directive('jwplayer', JWPlayer);
 
     /* @ngInject */
-    function JWPlayer($compile, $log, jwplayerService) {
+    function JWPlayer($compile, $log, $rootScope, jwplayerService) {
 
         var player;
 
@@ -21,6 +21,12 @@
             $compile(element.contents())(scope);
             player = jwplayerService.initJWPlayer(id);
             player.setup(scope.playerOptions);
+
+            player.on('ready', function() {
+                $rootScope.$broadcast('av-player-ready');
+            });
+
+
         };
 
         return {

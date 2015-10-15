@@ -8,7 +8,7 @@
         .service('jwplayerService', JWPlayerService);
 
     /* @ngInject */
-    function JWPlayerService($log) {
+    function JWPlayerService(jwplayer) {
 
         this.existJWPlayer = function() {
             return (angular.isDefined(this.myPlayer) && this.myPlayer !== null);
@@ -16,9 +16,9 @@
 
         this.initJWPlayer = function(id) {
 
+            id = id || 'myPlayer1';
             if (this.existJWPlayer()) {
 
-                $log.debug('Instance of JWPlayer exists. Removing first');
                 this.myPlayer.remove();
                 this.myPlayer = null;
             }
@@ -31,7 +31,6 @@
         this.cleanUp = function() {
             if (this.existJWPlayer()) {
 
-                $log.debug('Removing existing JWPlayer');
                 this.myPlayer.remove();
                 this.myPlayer = null;
             }

@@ -27,7 +27,8 @@
         <script>
 
             var myApp = angular.module('myApp', ['ng-jwplayer']);
-            myApp.controller('mainController', ['$scope', '$log', '$sce', function ($scope, $log, $sce) {
+            myApp.controller('mainController', ['$scope', '$log', '$sce', 'jwplayerService',
+                function ($scope, $log, $sce, jwplayerService) {
 
                 $scope.name = 'JWPlayer Example';
 
@@ -36,6 +37,12 @@
                 };
 
                 $scope.file = $sce.trustAsResourceUrl('http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4');
+
+                $scope.$on('av-player-ready', function(event) {
+
+                    $log.info('Player Ready. Get player using jwplayerService');
+                    jwplayerService.myPlayer.play(true);
+                });
 
             }]);
         </script>
