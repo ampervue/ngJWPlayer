@@ -76,7 +76,7 @@
             player.setup(scope.playerOptions);
 
             player.on('ready', function() {
-                $rootScope.$broadcast('av-player-ready');
+                $rootScope.$broadcast('ng-jwplayer-ready');
             });
 
 
