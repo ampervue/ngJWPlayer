@@ -52,6 +52,13 @@ myApp.controller('mainController', ['$scope', '$log', '$sce', function($scope, $
             
    $scope.file = $sce.trustAsResourceUrl('http://example.com/myVideo.mp4');
 
+   // Optional: Catch ng-jwplayer event for when JWPlayer is ready
+   $scope.$on('ng-jwplayer-ready', function(event) {
+
+        $log.info('Player Ready.');
+   });
+
+
 ]);
 
 ~~~~
