@@ -12,20 +12,21 @@
         var player;
 
         var _renderJWPlayerElement = function(scope, element) {
-            var id = scope.playerId,
-                getTemplate = function (playerId) {
+            var playerId = scope.playerId || 'myPlayer1';
+            var getTemplate = function (playerId) {
                     return '<div id="' + playerId + '"></div>';
                 };
 
-            element.html(getTemplate(id));
+            element.html(getTemplate(playerId));
             $compile(element.contents())(scope);
-            player = jwplayerService.initJWPlayer(id);
+            player = jwplayerService.initJWPlayer(playerId);
             player.setup(scope.playerOptions);
 
             player.on('ready', function() {
-                $rootScope.$broadcast('ng-jwplayer-ready');
+                $rootScope.$broadcast('ng-jwplayer-ready', { 
+                    playerId: playerId 
+                 });
             });
-
 
         };
 
@@ -36,16 +37,18 @@
                 playerOptions: '='
             },
             link: function (scope, element, attrs) {
+                
+                var playerId = scope.playerId || 'myPlayer1';
 
                 scope.$on('$destroy', function () {
-                    $log.debug('jwplayer onDestroy');
-                    jwplayerService.cleanUp();
+                    $log.debug('jwplayer onDestroy: ' + playerId);
+                    jwplayerService.cleanUp(playerId);
                 });
 
                 scope.$watch(function () {
                     return attrs.ngSrc;
                 }, function (value) {
-                    $log.debug('ng-src has changed: ' + value);
+                    $log.debug('ng-src(' + playerId + ') has changed: ' + value);
                     if (angular.isDefined(scope.playerOptions)) {
                         scope.playerOptions.file = value;
                         _renderJWPlayerElement(scope, element);

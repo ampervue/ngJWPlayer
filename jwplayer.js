@@ -21,30 +21,29 @@
 
     /* @ngInject */
     function JWPlayerService(jwplayer) {
+        
+        this.myPlayer = {};
 
-        this.existJWPlayer = function() {
-            return (angular.isDefined(this.myPlayer) && this.myPlayer !== null);
+        this.existJWPlayer = function(id) {
+            return (angular.isDefined(this.myPlayer) && 
+                    angular.isDefined(this.myPlayer[id]) && 
+                    this.myPlayer[id] !== null);
         };
 
         this.initJWPlayer = function(id) {
 
-            id = id || 'myPlayer1';
-            if (this.existJWPlayer()) {
+            // Always delete the player, if it exists
+            this.cleanUp(id);
 
-                this.myPlayer.remove();
-                this.myPlayer = null;
-            }
+            this.myPlayer[id] = jwplayer(id);
 
-            this.myPlayer = jwplayer(id);
-
-            return this.myPlayer;
+            return this.myPlayer[id];
         };
 
-        this.cleanUp = function() {
-            if (this.existJWPlayer()) {
-
-                this.myPlayer.remove();
-                this.myPlayer = null;
+        this.cleanUp = function(id) {
+            if (this.existJWPlayer(id)) {
+                this.myPlayer[id].remove();
+                this.myPlayer[id] = null;
             }
         };
     }
@@ -65,20 +64,21 @@
         var player;
 
         var _renderJWPlayerElement = function(scope, element) {
-            var id = scope.playerId,
-                getTemplate = function (playerId) {
+            var playerId = scope.playerId || 'myPlayer1';
+            var getTemplate = function (playerId) {
                     return '<div id="' + playerId + '"></div>';
                 };
 
-            element.html(getTemplate(id));
+            element.html(getTemplate(playerId));
             $compile(element.contents())(scope);
-            player = jwplayerService.initJWPlayer(id);
+            player = jwplayerService.initJWPlayer(playerId);
             player.setup(scope.playerOptions);
 
             player.on('ready', function() {
-                $rootScope.$broadcast('ng-jwplayer-ready');
+                $rootScope.$broadcast('ng-jwplayer-ready', { 
+                    playerId: playerId 
+                 });
             });
-
 
         };
 
@@ -89,16 +89,18 @@
                 playerOptions: '='
             },
             link: function (scope, element, attrs) {
+                
+                var playerId = scope.playerId || 'myPlayer1';
 
                 scope.$on('$destroy', function () {
-                    $log.debug('jwplayer onDestroy');
-                    jwplayerService.cleanUp();
+                    $log.debug('jwplayer onDestroy: ' + playerId);
+                    jwplayerService.cleanUp(playerId);
                 });
 
                 scope.$watch(function () {
                     return attrs.ngSrc;
                 }, function (value) {
-                    $log.debug('ng-src has changed: ' + value);
+                    $log.debug('ng-src(' + playerId + ') has changed: ' + value);
                     if (angular.isDefined(scope.playerOptions)) {
                         scope.playerOptions.file = value;
                         _renderJWPlayerElement(scope, element);

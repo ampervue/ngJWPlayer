@@ -53,12 +53,12 @@ myApp.controller('mainController', ['$scope', '$log', '$sce', function($scope, $
    $scope.file = $sce.trustAsResourceUrl('http://example.com/myVideo.mp4');
 
    // Optional: Catch ng-jwplayer event for when JWPlayer is ready
-   $scope.$on('ng-jwplayer-ready', function(event) {
+   $scope.$on('ng-jwplayer-ready', function(event, args) {
 
-        $log.info('Player Ready.');
+        $log.info('Player' + args.playerId + 'Ready.');
+        // Get player from service
+        var player = jwplayerService.myPlayer[args.playerId];
    });
-
-
 ]);
 
 ~~~~
@@ -71,6 +71,28 @@ myApp.controller('mainController', ['$scope', '$log', '$sce', function($scope, $
           player-id="myPlayer1">
 </jwplayer>
 ~~~~
+
+* You can instanciate multiple players
+
+~~~~
+<jwplayer ng-src="{{ file1 }}"
+          player-options="options1"
+          player-id="myPlayer1">
+</jwplayer>
+<jwplayer ng-src="{{ file2 }}"
+          player-options="options2"
+          player-id="myPlayer2">
+</jwplayer>
+~~~~
+
+### Samples
+
+* index.html shows the most basic example for a single player
+* index2.html shows how to instanciate two players on the same view
+
+### Version Changes
+
+* 0.2.0 adds support for multiple players on same view. jwplayerService.myPlayer is now an object and requires the playerID as key
 
 ### Contribute
 

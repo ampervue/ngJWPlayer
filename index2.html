@@ -10,9 +10,16 @@
                     <h1>{{ name1 }}</h1>
 
                     <jwplayer ng-src="{{ file1 }}"
-                              player-options="options1">
+                              player-options="options1"
+                              player-id="myPlayer1">
                     </jwplayer>
                     
+                    <h1>{{ name2 }}</h1>
+
+                    <jwplayer ng-src="{{ file2 }}"
+                              player-options="options2"
+                              player-id="myPlayer2">
+                    </jwplayer>
                 </div>
             </div>
         </div>
@@ -36,7 +43,15 @@
                     type: 'mp4'
                 };
 
-                $scope.file1 = $sce.trustAsResourceUrl('http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4');               
+                $scope.file1 = $sce.trustAsResourceUrl('http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4');
+                
+                $scope.name2 = 'JWPlayer Player 2';
+
+                $scope.options2 = {
+                    type: 'mp4'
+                };
+
+                $scope.file2 = $sce.trustAsResourceUrl('http://techslides.com/demos/sample-videos/small.mp4');                
 
                 $scope.$on('ng-jwplayer-ready', function(event, args) {
 
