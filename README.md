@@ -87,7 +87,7 @@ myApp.controller('mainController', ['$scope', '$log', '$sce', function($scope, $
 
 ### Samples
 
-* index.html shows the most basic example for a single player
+* index1.html shows the most basic example for a single player
 * index2.html shows how to instanciate two players on the same view
 
 ### Version Changes
