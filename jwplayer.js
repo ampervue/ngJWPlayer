@@ -20,7 +20,7 @@
         .service('jwplayerService', JWPlayerService);
 
     /* @ngInject */
-    function JWPlayerService(jwplayer) {
+    function JWPlayerService(jwplayer, $log) {
         
         this.myPlayer = {};
 
@@ -32,10 +32,10 @@
 
         this.initJWPlayer = function(id) {
 
-            // Always delete the player, if it exists
-            this.cleanUp(id);
-
-            this.myPlayer[id] = jwplayer(id);
+            if (!this.existJWPlayer(id)) {
+                $log.log('Initializing jwplayer for ' + id);
+                this.myPlayer[id] = jwplayer(id);
+            }
 
             return this.myPlayer[id];
         };
@@ -47,7 +47,7 @@
             }
         };
     }
-    JWPlayerService.$inject = ["jwplayer"];
+    JWPlayerService.$inject = ["jwplayer", "$log"];
 
 })();
 
