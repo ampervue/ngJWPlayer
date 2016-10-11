@@ -15,6 +15,7 @@
 (function () {
     'use strict';
 
+    JWPlayerService.$inject = ["jwplayer"];
     angular
         .module('ng-jwplayer')
         .service('jwplayerService', JWPlayerService);
@@ -47,13 +48,13 @@
             }
         };
     }
-    JWPlayerService.$inject = ["jwplayer"];
 
 })();
 
 (function() {
     'use strict';
 
+    JWPlayer.$inject = ["$compile", "$log", "$rootScope", "jwplayerService"];
     angular
         .module('ng-jwplayer')
         .directive('jwplayer', JWPlayer);
@@ -79,13 +80,12 @@
                     playerId: playerId 
                  });
             });
-            
+
             player.on('setupError', function() {
                 $rootScope.$broadcast('ng-jwplayer-setup-error', { 
                     playerId: playerId 
                  });
-            });            
-
+            });  
         };
 
         return {
@@ -120,5 +120,4 @@
             }
         };
     }
-    JWPlayer.$inject = ["$compile", "$log", "$rootScope", "jwplayerService"];
 })();

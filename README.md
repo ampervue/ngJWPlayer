@@ -92,6 +92,7 @@ myApp.controller('mainController', ['$scope', '$log', '$sce', function($scope, $
 
 ### Version Changes
 
+* 0.2.1 adds broadcast on player's setup-error
 * 0.2.0 adds support for multiple players on same view. jwplayerService.myPlayer is now an object and requires the playerID as key
 
 ### Contribute

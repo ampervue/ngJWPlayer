@@ -28,6 +28,11 @@
                  });
             });
 
+            player.on('setupError', function() {
+                $rootScope.$broadcast('ng-jwplayer-setup-error', { 
+                    playerId: playerId 
+                 });
+            });  
         };
 
         return {
