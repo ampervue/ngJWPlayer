@@ -1,9 +1,10 @@
 {
   "name": "ng-jwplayer",
-   "version": "0.2.3",
+  "version": "0.2.3",
   "author": "David Karchmer",
   "license": "MIT",
   "description": "Angular directive for JWPlayer",
+  "main": "jwplayer.js",
   "dependencies": {
   },
   "devDependencies": {
