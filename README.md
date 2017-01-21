@@ -4,10 +4,16 @@ Angular Directive to instantiate a JWPlayer. Requires a license and JS package f
 
 ### Installation
 
-Assumes you have npm and bower installed
+Use bower:
 
 ~~~~
 bower install ng-jwplayer --save
+~~~~
+
+or NPM
+
+~~~~
+npm install ng-jwplayer --save
 ~~~~
 
 ### Usage
